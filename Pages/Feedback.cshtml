@@ -1,0 +1,57 @@
+﻿@page
+@model WebApplication3.Pages.FeedbackModel
+@{
+    ViewData["Title"] = "Feedback Form";
+}
+
+<h2>Feedback Form</h2>
+<link rel="stylesheet" href="./css/site.css"/>
+<form method="post">
+    <div class="form-container">
+        <div class="element">
+            <label>Email:</label>
+            <input asp-for="Feedback.Email" />
+            <span asp-validation-for="Feedback.Email" style="color:red"></span>
+        </div>
+
+        <div class="element">
+            <label>Address:</label>
+            <input asp-for="Feedback.Address" />
+            <span asp-validation-for="Feedback.Address" style="color:red"></span>
+        </div>
+
+        <div class="element">
+            <label>Concern/Issues:</label>
+            <textarea asp-for="Feedback.Concern"></textarea>
+            <span asp-validation-for="Feedback.Concern" style="color:red"></span>
+        </div>
+
+        <div class="element">
+            <label>Department/Division:</label>
+            <select asp-for="Feedback.Department">
+                <option value="">-- Select Department --</option>
+                <option>IT</option>
+                <option>HR</option>
+                <option>Finance</option>
+                <option>Operations</option>
+            </select>
+            <span asp-validation-for="Feedback.Department" style="color:red"></span>
+        </div>
+
+        <button type="submit" asp-page-handler="Send">Send</button>
+        <button type="submit" asp-page-handler="Clear">Clear</button>
+
+    </div>
+    
+</form>
+
+@if (!string.IsNullOrEmpty(Model.SuccessMessage))
+{
+    <p style="color:green">@Model.SuccessMessage</p>
+
+    <h3>Submitted Details:</h3>
+    <p>Email: @Model.Feedback.Email</p>
+    <p>Address: @Model.Feedback.Address</p>
+    <p>Concern/Issues: @Model.Feedback.Concern</p>
+    <p>Department/Division: @Model.Feedback.Department</p>
+}
