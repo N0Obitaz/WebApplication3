@@ -12,27 +12,31 @@ namespace WebApplication3.Pages
 
         public string SuccessMessage { get; set; }
 
+        public static List<Feedback> Feedbacks { get; set; } = new List<Feedback>();
+
         public void OnGet()
         {
+
         }
 
         // SendForm
+   
         public IActionResult OnPostSend()
         {
             if (!ModelState.IsValid)
             {
                 return Page(); 
             }
-
+            Feedbacks.Add(Feedback);
             SuccessMessage = "Feedback submitted successfully!";
             return Page();
         }
 
-
+        //Clear Form
         public IActionResult OnPostClear()
         {
             ModelState.Clear();
-            Feedback = new Feedback(); // reset form
+            Feedback = new Feedback();
             return Page();
         }
     }

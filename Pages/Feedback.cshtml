@@ -4,7 +4,7 @@
     ViewData["Title"] = "Feedback Form";
 }
 
-<h2>Feedback Form</h2>
+<h2 style="text-align: center;">Feedback Form</h2>
 <link rel="stylesheet" href="./css/site.css"/>
 <form method="post">
     <div class="form-container">
@@ -25,7 +25,6 @@
             <textarea asp-for="Feedback.Concern"></textarea>
             <span asp-validation-for="Feedback.Concern" style="color:red"></span>
         </div>
-
         <div class="element">
             <label>Department/Division:</label>
             <select asp-for="Feedback.Department">
@@ -45,13 +44,22 @@
     
 </form>
 
-@if (!string.IsNullOrEmpty(Model.SuccessMessage))
-{
-    <p style="color:green">@Model.SuccessMessage</p>
 
-    <h3>Submitted Details:</h3>
-    <p>Email: @Model.Feedback.Email</p>
-    <p>Address: @Model.Feedback.Address</p>
-    <p>Concern/Issues: @Model.Feedback.Concern</p>
-    <p>Department/Division: @Model.Feedback.Department</p>
-}
+
+    @foreach(var feedback in FeedbackModel.Feedbacks) 
+    {
+
+        @if (!string.IsNullOrEmpty(Model.SuccessMessage))
+        {
+        <div class="alert-success">
+                <p style="color:green">@Model.SuccessMessage</p>
+
+            <h3>Submitted Details:</h3>
+                <p>Email: @feedback.Email</p>
+                <p>Address: @feedback.Address</p>
+                <p>Concern/Issues: @feedback.Concern</p>
+                <p>Department/Division: @feedback.Department</p>
+        </div>
+
+        }
+    }
